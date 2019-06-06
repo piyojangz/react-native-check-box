@@ -6,8 +6,8 @@
  * Blog:http://www.devio.org
  * @flow
  */
-
-import React, {Component} from 'react';
+import { Icon } from 'native-base';
+import React, { Component } from 'react';
 import {
     StyleSheet,
     View,
@@ -102,7 +102,6 @@ export default class CheckBox extends Component {
     }
 
     genCheckedImage() {
-        let source;
         if (this.props.isIndeterminate) {
             source = require('./img/ic_indeterminate_check_box.png');
         }
@@ -110,9 +109,44 @@ export default class CheckBox extends Component {
             source = this.props.isChecked ? require('./img/ic_check_box.png') : require('./img/ic_check_box_outline_blank.png');
         }
 
-        return (
-            <Image source={source} style={{tintColor: this._getTintColor()}}/>
-        );
+
+        if (this.props.isIndeterminate) {
+            return (
+                <View
+                    style={{
+                        width: 30, height: 30, marginLeft: 5,
+                        backgroundColor: 'rgba(125,193,76,1)',
+                        borderRadius: 5, borderColor: 'rgba(125,193,76,1)', borderWidth: 1, justifyContent: 'center', alignItems: 'center'
+                    }}>
+                </View>
+            );
+        }
+        else {
+            if (this.props.isChecked) {
+                return (
+                    <View
+                        style={{
+                            width: 30, height: 30, marginLeft: 5,
+                            backgroundColor: 'rgba(125,193,76,1)',
+                            borderRadius: 5, borderColor: 'rgba(125,193,76,1)', borderWidth: 1, justifyContent: 'center', alignItems: 'center'
+                        }}>
+                        <Icon style={{ color: '#fff', fontSize: 60, backgroundColor: 'rgba(0,0,0,0)' }} name="ios-checkmark" />
+                    </View>
+                );
+            }
+            else {
+                return (
+                    <View
+                        style={{
+                            width: 30, height: 30, marginLeft: 5,
+                            borderRadius: 5, borderColor: '#ddd', borderWidth: 1, justifyContent: 'center', alignItems: 'center'
+                        }}>
+                    </View>
+                );
+            }
+
+        }
+
     }
 
     render() {
